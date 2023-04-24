@@ -14,21 +14,21 @@ These files can consist of, e.g.:
 
 ## How to import a building block
 
-Importing a process blueprint and customizing it for a specific use case can be done by following the instructions on
-this page. Additionally, specific instructions for a blueprint can be found on GitHub for that particular process
-blueprint. These always take precedent over these general instructions.
+Importing a building block and customizing it for a specific use case can be done by following the instructions on
+this page. Additionally, specific instructions for a building block can be found on GitHub for that particular building block. 
+These always take precedent over these general instructions.
 
 ### Copying files
 
 Almost all the files in `backend` can be copied into the back-end of an implementation project. The exceptions are:
 
-* `application.yml`. This only includes the configurations required by the process blueprint. These should be merged
+* `application.yml`. This only includes the configurations required by the building block. These should be merged
   with the `application.yml` you already have.
-* `build.gradle` or `pom.xml`. This only includes the dependencies required by the process blueprint. These should be
+* `build.gradle` or `pom.xml`. This only includes the dependencies required by the building block. These should be
   merged with the `build.gradle` or `pom.xml` you already have.
 
 Almost all files in `frontend` can be copied into the front-end of an implementation project. The exception is
-`package.json`. This only includes the dependencies required by the process blueprint. These should be merged with
+`package.json`. This only includes the dependencies required by the building block. These should be merged with
 the `package.json` you already have.
 
 ### Configuring and customizing the building block
