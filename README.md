@@ -3,13 +3,8 @@
 ![en](https://img.shields.io/badge/lang-en-red.svg)
 
 Building blocks are a collection of files, that can be used to supplement a process or other parts of an implementation.
-These can consist of:
-- Decision tables (DMN)
-- Form definitions (Form.IO)
-- Form flow definitions
-- Implementation code 
-  - Backend (Java or Kotlin)
-  - Frontend (Angular)
+These can consist of forms, form flows, custom front-end, and back-end code. Unlike [process blueprints](blueprints.md),
+building blocks do not contain a process definition. For example, a plugin that allows sending messages via Slack.
 
 ## How to import a building block
 
@@ -19,35 +14,7 @@ block. These always take precedent over these general instructions.
 
 ### Copying files
 
-This is the general structure of a building block:
-
-```
-|-- building-blocks
-|   |-- [name of the building block]
-|   |   |-- backend
-|   |   |   |-- main
-|   |   |   |   |-- java
-|   |   |   |   |-- kotlin
-|   |   |   |   |-- resources
-|   |   |   |       |-- dmn
-|   |   |   |       |-- config
-|   |   |   |           |-- form
-|   |   |   |           |-- form-flow
-|   |   |   |           |-- liquibase
-|   |   |   |           |-- application.yml
-|   |   |   |-- build.gradle/pom.xml
-|   |   |-- frontend
-|   |   |   |-- app
-|   |   |   |-- assets
-|   |   |   |-- environments
-|   |   |   |-- package.json
-|   |   |-- README.md
-|   |-- ...
-|-- CONTRIBUTING.md
-|-- README.md
-```
-
-Almost all the files in `backend` can be copied into the back-end of an implementation project. The exceptions are:
+Almost all files in `backend` can be copied into the back-end of an implementation project. The exceptions are:
 
 * `application.yml`. This only includes the configurations required by the building block. These should be merged
   with the `application.yml` you already have.
