@@ -3,8 +3,8 @@
 ![en](https://img.shields.io/badge/lang-en-red.svg)
 
 Building blocks are a collection of files, that can be used to supplement a process or other parts of an implementation.
-These can consist of forms, form flows, custom front-end, and back-end code. Unlike [process blueprints](blueprints.md),
-building blocks do not contain a process definition. For example, a plugin that allows sending messages via Slack.
+These can consist of forms, form flows, plugins, custom front-end, and back-end code. Unlike [process blueprints](blueprints.md),
+building blocks do not contain a process definition. For example, a plugin that allows sending messages via Slack could be a building block.
 
 ## How to import a building block
 
