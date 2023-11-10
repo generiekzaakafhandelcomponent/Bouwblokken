@@ -19,7 +19,7 @@
     <bpmn:sequenceFlow id="ViaPostSequenceFlow" name="Via post" sourceRef="CommunicatieVoorkeurGateway" targetRef="AfdrukkenBriefTask">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${communicatievoorkeur == "post"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sendTask id="VersturenEmailNotificatieTask" name="versturen e-mail notificatie" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)} ">
+    <bpmn:sendTask id="VersturenEmailNotificatieTask" name="versturen e-mail notificatie" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${true} ">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="portaalnotificatieVerstuurd">${true}</camunda:outputParameter>
@@ -35,7 +35,7 @@
       <bpmn:incoming>ViaPortaalSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_04kzfel</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="VerzendenEmailMetBijlageTask" name="verzenden email (evt met bijlage)" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${mailService.sendElementTemplateTaskMail(execution)} ">
+    <bpmn:sendTask id="VerzendenEmailMetBijlageTask" name="verzenden email (evt met bijlage)" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${true} ">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="portaalnotificatieVerstuurd">${false}</camunda:outputParameter>

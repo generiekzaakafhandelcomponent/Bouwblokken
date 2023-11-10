@@ -8,7 +8,6 @@ categories:
 description:
   en:
     features:
-      - Creating an example case
       - Informeren aanvrager
     genericName: GZAC Component
 
@@ -38,9 +37,9 @@ maintenance:
 name: GZAC - Informeren aanvrager
 platforms:
   - web
-releaseDate: '2023-06-14'
+releaseDate: '2023-11-10'
 softwareType: addon
-softwareVersion: 10.5.0.RELEASE
-url: 'https://github.com/generiekzaakafhandelcomponent/Basisprocessen.git'
+softwareVersion: 10.7.0.RELEASE
+url: 'https://github.com/generiekzaakafhandelcomponent/Bouwblokken'
 usedBy:
   - Gemeente Den Haag
