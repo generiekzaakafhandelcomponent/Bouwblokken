@@ -72,29 +72,29 @@
     <bpmn:sequenceFlow id="Flow_08q4wbr" sourceRef="Activity_1jobqwk" targetRef="Activity_0v8838j" />
     <bpmn:textAnnotation id="TextAnnotation_0p9crn0">
       <bpmn:text>implementeer methode:
-leg vast of de hersteltermijn afgelopen is sla de resultaat op in een process variable</bpmn:text>
+controleer of de hersteltermijn afgelopen is en sla het resultaat op in een process variable</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1doynbv" sourceRef="TextAnnotation_0p9crn0" targetRef="Activity_0kiwint" />
-    <bpmn:textAnnotation id="TextAnnotation_1chz3pn">
-      <bpmn:text>implementeer methode:
-leg vast of er en hersteltermijn aanwezig is op het huidige informatieverzoek</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_1l2kgi9" sourceRef="TextAnnotation_1chz3pn" targetRef="Activity_0rao4g3" />
     <bpmn:textAnnotation id="TextAnnotation_18112nz">
       <bpmn:text>implementeer methode:
-stop de hersteltermijn</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_187ul0k">
-      <bpmn:text>implementeer methode:
-bereken het tijdsverschil</bpmn:text>
+leg de huidige datum en tijd vast als einddatum van de hersteltermijn</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_02dq81r" sourceRef="TextAnnotation_18112nz" targetRef="Activity_1jobqwk" />
+    <bpmn:textAnnotation id="TextAnnotation_187ul0k">
+      <bpmn:text>implementeer methode:
+bereken het tijdsverschil tussen de startdatum en de einddatum van de hersteltermijn</bpmn:text>
+    </bpmn:textAnnotation>
     <bpmn:association id="Association_187qmsf" sourceRef="TextAnnotation_187ul0k" targetRef="Activity_0v8838j" />
     <bpmn:textAnnotation id="TextAnnotation_160kkni">
       <bpmn:text>implementeer methode:
-roep aan Message Start Event of Intermediate Catch Event van een ander process inclusief doorlooptijd</bpmn:text>
+Roep Message Start Event of Intermediate Catch Event van een (bovenliggend) process aan en geef het tijdverschil door</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0y2bapf" sourceRef="TextAnnotation_160kkni" targetRef="Event_0x5lyq8" />
+    <bpmn:textAnnotation id="TextAnnotation_1chz3pn">
+      <bpmn:text>implementeer methode:
+controleer of er een hersteltermijn is geconfigureerd op het huidige informatieverzoek en sla het resultaat op in een process variable</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1l2kgi9" sourceRef="TextAnnotation_1chz3pn" targetRef="Activity_0rao4g3" />
   </bpmn:process>
   <bpmn:message id="Message_37gph2h" name="Message_37gph2h" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -104,23 +104,23 @@ roep aan Message Start Event of Intermediate Catch Event van een ander process i
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0b3433a" bpmnElement="TextAnnotation_0p9crn0">
-        <dc:Bounds x="535" y="482" width="189.99027057079317" height="69.68124536693847" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1chz3pn_di" bpmnElement="TextAnnotation_1chz3pn">
-        <dc:Bounds x="283" y="482" width="174.99073387694588" height="69.68124536693847" />
+        <dc:Bounds x="520" y="460" width="190" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_109tovm" bpmnElement="TextAnnotation_18112nz">
-        <dc:Bounds x="817" y="496" width="145" height="41" />
+        <dc:Bounds x="800" y="460" width="145" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_03r1iiv" bpmnElement="TextAnnotation_187ul0k">
-        <dc:Bounds x="975" y="496" width="150" height="41" />
+        <dc:Bounds x="1000" y="453" width="150" height="84" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0orpoa6" bpmnElement="TextAnnotation_160kkni">
-        <dc:Bounds x="1195" y="475" width="189.99027057079317" height="83.76575240919199" />
+        <dc:Bounds x="1210" y="453" width="190" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1chz3pn_di" bpmnElement="TextAnnotation_1chz3pn">
+        <dc:Bounds x="250" y="460" width="210" height="92" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_199sx5i_di" bpmnElement="Event_199sx5i">
@@ -163,24 +163,24 @@ roep aan Message Start Event of Intermediate Catch Event van een ander process i
         <dc:Bounds x="1000" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1doynbv_di" bpmnElement="Association_1doynbv">
-        <di:waypoint x="630" y="482" />
-        <di:waypoint x="630" y="320" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1l2kgi9_di" bpmnElement="Association_1l2kgi9">
-        <di:waypoint x="371" y="482" />
-        <di:waypoint x="370" y="320" />
+        <di:waypoint x="617" y="460" />
+        <di:waypoint x="627" y="320" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_02dq81r_di" bpmnElement="Association_02dq81r">
-        <di:waypoint x="890" y="496" />
-        <di:waypoint x="890" y="320" />
+        <di:waypoint x="875" y="460" />
+        <di:waypoint x="887" y="320" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_187qmsf_di" bpmnElement="Association_187qmsf">
-        <di:waypoint x="1050" y="496" />
-        <di:waypoint x="1050" y="320" />
+        <di:waypoint x="1072" y="453" />
+        <di:waypoint x="1055" y="320" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0y2bapf_di" bpmnElement="Association_0y2bapf">
-        <di:waypoint x="1271" y="475" />
-        <di:waypoint x="1187" y="296" />
+        <di:waypoint x="1281" y="453" />
+        <di:waypoint x="1189" y="296" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1l2kgi9_di" bpmnElement="Association_1l2kgi9">
+        <di:waypoint x="343" y="460" />
+        <di:waypoint x="364" y="320" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1r0v4lv_di" bpmnElement="Flow_1r0v4lv">
         <di:waypoint x="268" y="280" />
