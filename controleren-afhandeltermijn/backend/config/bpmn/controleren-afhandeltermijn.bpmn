@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1b8nl2v" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.17.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:message id="Message_0pt82if" name="MESSAGE_OOIEVAARSPAS_START" />
+  <bpmn:message id="Message_0a6ts0p" name="MESSAGE_OOIEVAARSPAS_WIJZIG_BEHANDELAAR" />
+  <bpmn:message id="Message_0rq3viq" name="MESSAGE_OOIEVAARSPAS_WIJZIG_DOSSIER" />
+  <bpmn:message id="Message_1s362i9" name="MESSAGE_OOIEVAARSPAS_INFORMATIE_REACTIE_ONTVANGEN" />
+  <bpmn:escalation id="Escalation_38st636" name="ESCALATION_OOIEVAARSPAS_INFORMATIE_HERSTELTERMIJN_AANVRAGER" escalationCode="1" />
+  <bpmn:escalation id="Escalation_3g8a60v" name="ESCALATION_OOIEVAARSPAS_INFORMATIE_HERSTELTERMIJN_BEHANDELAAR" escalationCode="1" />
+  <bpmn:collaboration id="Collaboration_0lw88p5">
+    <bpmn:participant id="Participant_1l8y9sq" name="Controleren afhandeltermijn" processRef="controleren-afhandeltermijn" />
+  </bpmn:collaboration>
+  <bpmn:message id="Message_3327637" name="AFHANDELTERMIJN_AANGEPAST" />
+  <bpmn:process id="controleren-afhandeltermijn" name="Controleren afhandeltermijn" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_09hkba0" />
+    <bpmn:startEvent id="Event_199sx5i" camunda:asyncAfter="true">
+      <bpmn:outgoing>Flow_1r0v4lv</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_189nv5z" name="Informatieverzoek met hersteltermijn?" default="Flow_0gxz10p">
+      <bpmn:incoming>Flow_0kdevlm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mughf8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0gxz10p</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0gk88ja" name="Hersteltermijn al afgelopen?" default="Flow_05aomf9">
+      <bpmn:incoming>Flow_1c9hglm</bpmn:incoming>
+      <bpmn:outgoing>Flow_05aomf9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1kzsud4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_1yy1ow3">
+      <bpmn:incoming>Flow_153586m</bpmn:incoming>
+      <bpmn:incoming>Flow_0gxz10p</bpmn:incoming>
+      <bpmn:incoming>Flow_1kzsud4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yhfz28</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_1ujt71g">
+      <bpmn:incoming>Flow_0yhfz28</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateThrowEvent id="Event_0x5lyq8" name="Aanpassen afhandeltermijn" camunda:asyncAfter="true">
+      <bpmn:incoming>Flow_1riz2e3</bpmn:incoming>
+      <bpmn:outgoing>Flow_153586m</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1h3smyo" camunda:expression="${true}" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:serviceTask id="Activity_0rao4g3" name="Controleren informatie-verzoek" camunda:asyncAfter="true" camunda:expression="${true}" camunda:resultVariable="hersteltermijnAanwezig">
+      <bpmn:incoming>Flow_1r0v4lv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kdevlm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0kiwint" name="Controleren hersteltermijn" camunda:asyncAfter="true" camunda:expression="${true}" camunda:resultVariable="hersteltermijnAfgelopen">
+      <bpmn:incoming>Flow_0mughf8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1c9hglm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1jobqwk" name="Stop hersteltermijn" camunda:asyncAfter="true" camunda:expression="${true}">
+      <bpmn:incoming>Flow_05aomf9</bpmn:incoming>
+      <bpmn:outgoing>Flow_08q4wbr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0v8838j" name="Bereken tijdsverschil hersteltermijn" camunda:asyncAfter="true" camunda:expression="${true}" camunda:resultVariable="doorlooptijd">
+      <bpmn:incoming>Flow_08q4wbr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1riz2e3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1r0v4lv" sourceRef="Event_199sx5i" targetRef="Activity_0rao4g3" />
+    <bpmn:sequenceFlow id="Flow_0kdevlm" sourceRef="Activity_0rao4g3" targetRef="Gateway_189nv5z" />
+    <bpmn:sequenceFlow id="Flow_0mughf8" name="Ja" sourceRef="Gateway_189nv5z" targetRef="Activity_0kiwint">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${hersteltermijnAanwezig}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0gxz10p" name="Nee" sourceRef="Gateway_189nv5z" targetRef="Gateway_1yy1ow3" />
+    <bpmn:sequenceFlow id="Flow_1c9hglm" sourceRef="Activity_0kiwint" targetRef="Gateway_0gk88ja" />
+    <bpmn:sequenceFlow id="Flow_05aomf9" name="Nee" sourceRef="Gateway_0gk88ja" targetRef="Activity_1jobqwk" />
+    <bpmn:sequenceFlow id="Flow_1kzsud4" name="Ja" sourceRef="Gateway_0gk88ja" targetRef="Gateway_1yy1ow3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${hersteltermijnAfgelopen}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_153586m" sourceRef="Event_0x5lyq8" targetRef="Gateway_1yy1ow3" />
+    <bpmn:sequenceFlow id="Flow_0yhfz28" sourceRef="Gateway_1yy1ow3" targetRef="Event_1ujt71g" />
+    <bpmn:sequenceFlow id="Flow_1riz2e3" sourceRef="Activity_0v8838j" targetRef="Event_0x5lyq8" />
+    <bpmn:sequenceFlow id="Flow_08q4wbr" sourceRef="Activity_1jobqwk" targetRef="Activity_0v8838j" />
+    <bpmn:textAnnotation id="TextAnnotation_0p9crn0">
+      <bpmn:text>implementeer methode:
+leg vast of de hersteltermijn afgelopen is sla de resultaat op in een process variable</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1doynbv" sourceRef="TextAnnotation_0p9crn0" targetRef="Activity_0kiwint" />
+    <bpmn:textAnnotation id="TextAnnotation_1chz3pn">
+      <bpmn:text>implementeer methode:
+leg vast of er en hersteltermijn aanwezig is op het huidige informatieverzoek</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1l2kgi9" sourceRef="TextAnnotation_1chz3pn" targetRef="Activity_0rao4g3" />
+    <bpmn:textAnnotation id="TextAnnotation_18112nz">
+      <bpmn:text>implementeer methode:
+stop de hersteltermijn</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_187ul0k">
+      <bpmn:text>implementeer methode:
+bereken het tijdsverschil</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_02dq81r" sourceRef="TextAnnotation_18112nz" targetRef="Activity_1jobqwk" />
+    <bpmn:association id="Association_187qmsf" sourceRef="TextAnnotation_187ul0k" targetRef="Activity_0v8838j" />
+    <bpmn:textAnnotation id="TextAnnotation_160kkni">
+      <bpmn:text>implementeer methode:
+roep aan Message Start Event of Intermediate Catch Event van een ander process inclusief doorlooptijd</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0y2bapf" sourceRef="TextAnnotation_160kkni" targetRef="Event_0x5lyq8" />
+  </bpmn:process>
+  <bpmn:message id="Message_37gph2h" name="Message_37gph2h" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0lw88p5">
+      <bpmndi:BPMNShape id="BPMNShape_12ildwq" bpmnElement="Participant_1l8y9sq" isHorizontal="true">
+        <dc:Bounds x="129" y="80" width="1371" height="538.765752409192" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0b3433a" bpmnElement="TextAnnotation_0p9crn0">
+        <dc:Bounds x="535" y="482" width="189.99027057079317" height="69.68124536693847" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1chz3pn_di" bpmnElement="TextAnnotation_1chz3pn">
+        <dc:Bounds x="283" y="482" width="174.99073387694588" height="69.68124536693847" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_109tovm" bpmnElement="TextAnnotation_18112nz">
+        <dc:Bounds x="817" y="496" width="145" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_03r1iiv" bpmnElement="TextAnnotation_187ul0k">
+        <dc:Bounds x="975" y="496" width="150" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0orpoa6" bpmnElement="TextAnnotation_160kkni">
+        <dc:Bounds x="1195" y="475" width="189.99027057079317" height="83.76575240919199" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_199sx5i_di" bpmnElement="Event_199sx5i">
+        <dc:Bounds x="232" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_189nv5z_di" bpmnElement="Gateway_189nv5z" isMarkerVisible="true">
+        <dc:Bounds x="475" y="255" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="456" y="312" width="88" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0gk88ja_di" bpmnElement="Gateway_0gk88ja" isMarkerVisible="true">
+        <dc:Bounds x="735" y="255" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720" y="225" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1yy1ow3_di" bpmnElement="Gateway_1yy1ow3" isMarkerVisible="true">
+        <dc:Bounds x="1265" y="255" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ujt71g_di" bpmnElement="Event_1ujt71g">
+        <dc:Bounds x="1382" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ns57m0_di" bpmnElement="Event_0x5lyq8">
+        <dc:Bounds x="1162" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1142" y="226" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_10p4ar6_di" bpmnElement="Activity_0rao4g3">
+        <dc:Bounds x="320" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0crc7j4_di" bpmnElement="Activity_0kiwint">
+        <dc:Bounds x="580" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pbcy90_di" bpmnElement="Activity_1jobqwk">
+        <dc:Bounds x="840" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m9fzdg_di" bpmnElement="Activity_0v8838j">
+        <dc:Bounds x="1000" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1doynbv_di" bpmnElement="Association_1doynbv">
+        <di:waypoint x="630" y="482" />
+        <di:waypoint x="630" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1l2kgi9_di" bpmnElement="Association_1l2kgi9">
+        <di:waypoint x="371" y="482" />
+        <di:waypoint x="370" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_02dq81r_di" bpmnElement="Association_02dq81r">
+        <di:waypoint x="890" y="496" />
+        <di:waypoint x="890" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_187qmsf_di" bpmnElement="Association_187qmsf">
+        <di:waypoint x="1050" y="496" />
+        <di:waypoint x="1050" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0y2bapf_di" bpmnElement="Association_0y2bapf">
+        <di:waypoint x="1271" y="475" />
+        <di:waypoint x="1187" y="296" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1r0v4lv_di" bpmnElement="Flow_1r0v4lv">
+        <di:waypoint x="268" y="280" />
+        <di:waypoint x="320" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kdevlm_di" bpmnElement="Flow_0kdevlm">
+        <di:waypoint x="420" y="280" />
+        <di:waypoint x="475" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mughf8_di" bpmnElement="Flow_0mughf8">
+        <di:waypoint x="525" y="280" />
+        <di:waypoint x="580" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="544" y="262" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gxz10p_di" bpmnElement="Flow_0gxz10p">
+        <di:waypoint x="500" y="255" />
+        <di:waypoint x="500" y="150" />
+        <di:waypoint x="1290" y="150" />
+        <di:waypoint x="1290" y="255" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="539" y="132" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1c9hglm_di" bpmnElement="Flow_1c9hglm">
+        <di:waypoint x="680" y="280" />
+        <di:waypoint x="735" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05aomf9_di" bpmnElement="Flow_05aomf9">
+        <di:waypoint x="785" y="280" />
+        <di:waypoint x="840" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="802" y="262" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kzsud4_di" bpmnElement="Flow_1kzsud4">
+        <di:waypoint x="760" y="305" />
+        <di:waypoint x="760" y="410" />
+        <di:waypoint x="1290" y="410" />
+        <di:waypoint x="1290" y="305" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="809" y="392" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_153586m_di" bpmnElement="Flow_153586m">
+        <di:waypoint x="1198" y="280" />
+        <di:waypoint x="1265" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yhfz28_di" bpmnElement="Flow_0yhfz28">
+        <di:waypoint x="1315" y="280" />
+        <di:waypoint x="1382" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1riz2e3_di" bpmnElement="Flow_1riz2e3">
+        <di:waypoint x="1100" y="280" />
+        <di:waypoint x="1162" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08q4wbr_di" bpmnElement="Flow_08q4wbr">
+        <di:waypoint x="940" y="280" />
+        <di:waypoint x="1000" y="280" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
