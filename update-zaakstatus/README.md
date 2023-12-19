@@ -4,7 +4,7 @@
 ![update-zaakstatus](update-zaakstatus.png)
 ## Inleiding
 Het **Update zaakstatus** bouwblok kan gebruikt worden om een status voor een Zaak in Zaken API aan te maken en volgens 
-Zaak details opslaan in het zaakdossier binnen Valtimo GZAC.
+de zaakstatus op te slaan in het zaakdossier (zaak details) binnen Valtimo GZAC.
    
 ## Installatie
 We gaan uit van een bestaande Valtimo GZAC backend repository met daarin een bestaand proces.
@@ -15,6 +15,6 @@ en behoud dezelfde directory structuur.
 
 ## Aanroepen bouwblok
 
-Het proces van dit blouwblok kan aangeroepen worden via een call activity (Called element: `update-zaakstatus`) 
-in een(hoofd)proces. De call activity moet de volgende variabelen doorsturen naar dit boublok:
+Het proces van dit bouwblok kan aangeroepen worden via een call activity (Called element: `update-zaakstatus`) 
+in een(hoofd)proces. De call activity moet de volgende variabelen doorsturen naar dit bouwblok:
 - `status`: de tekstuele waarde van het te creëren nieuwe status
