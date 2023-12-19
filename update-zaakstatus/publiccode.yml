@@ -36,7 +36,7 @@ maintenance:
 name: GZAC - Update zaakstatus
 platforms:
   - web
-releaseDate: '2023-12-28'
+releaseDate: '2023-12-19'
 softwareType: addon
 softwareVersion: 10.7.0.RELEASE
 url: 'https://github.com/generiekzaakafhandelcomponent/Bouwblokken'
