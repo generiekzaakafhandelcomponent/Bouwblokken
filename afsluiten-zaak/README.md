@@ -3,9 +3,9 @@
 
 ![afsluiten-zaak](afsluiten-zaak.png)
 ## Inleiding
-Het **Afsluiten zaak** bouwblok kan gebruikt worden om een Zaak in Zaken API af te sluiten doormiddel en resultaat en 
-eindstatus te creëren.
-Dit bouwblok maakt gebruik van de [Update zaakstatus](../update-zaakstatus) bouwblok. Het is verplicht om het 
+Het **Afsluiten zaak** bouwblok kan gebruikt worden om een Zaak in Zaken API af te sluiten door een resultaat en 
+een eindstatus te creëren.
+Dit bouwblok maakt gebruik van de [Update zaakstatus](../update-zaakstatus) bouwblok. Het is een voorwaarde om het 
 `Update zaakstatus` bouwblok eerst op te zetten.
    
 ## Installatie
@@ -18,6 +18,6 @@ en behoud dezelfde directory structuur.
 ## Aanroepen bouwblok
 
 Het proces van dit blouwblok kan aangeroepen worden via een call activity (Called element: `afsluiten-zaak`) 
-in een(hoofd)proces. De call activity moet de volgende variabelen doorsturen naar dit boublok:
+in een(hoofd)proces. De call activity moet de volgende variabelen doorsturen naar dit bouwblok:
 - `resultaat`: de tekstuele waarde van het te creëren niuewe zaakresultaat
 - `status`: de tekstuele waarde van het te creëren nieuwe zaakstatus
