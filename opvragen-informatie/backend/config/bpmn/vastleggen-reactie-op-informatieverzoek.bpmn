@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0q7bqd0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_0y05wt1">
+    <bpmn:participant id="VastleggenReactieOpInformatieverzoekParticipant" name="Vastleggen reactie op informatieverzoek" processRef="vastleggen-reactie-op-informatieverzoek" />
+    <bpmn:textAnnotation id="TextAnnotation_04m7ocq">
+      <bpmn:text>Implementeer methode:
+correlate message 'MESSAGE_INFORMATIE_REACTIE_ONTVANGEN' naar dit businessKey</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_05ysz4w" associationDirection="None" sourceRef="ReactieIsVastgelegdEndEventEndEvent" targetRef="TextAnnotation_04m7ocq" />
+  </bpmn:collaboration>
+  <bpmn:process id="vastleggen-reactie-op-informatieverzoek" name="Vastleggen reactie op informatieverzoek" isExecutable="true">
+    <bpmn:startEvent id="StartVastleggenReactieStartEvent" name="Start vastleggen reactie">
+      <bpmn:outgoing>Flow_02mop46</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="ReactieIsVastgelegdEndEventEndEvent" name="Reactie is vastgelegd" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_02mop46</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1exh3yv" camunda:expression="${true}" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_02mop46" sourceRef="StartVastleggenReactieStartEvent" targetRef="ReactieIsVastgelegdEndEventEndEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y05wt1">
+      <bpmndi:BPMNShape id="Participant_1nv3dq9_di" bpmnElement="VastleggenReactieOpInformatieverzoekParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="350" height="310" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zho5du_di" bpmnElement="StartVastleggenReactieStartEvent">
+        <dc:Bounds x="242" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="222" y="275" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0lx1yh6" bpmnElement="ReactieIsVastgelegdEndEventEndEvent">
+        <dc:Bounds x="392" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="385" y="275" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_02mop46_di" bpmnElement="Flow_02mop46">
+        <di:waypoint x="278" y="250" />
+        <di:waypoint x="392" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_05ysz4w_di" bpmnElement="Association_05ysz4w">
+        <di:waypoint x="410" y="232" />
+        <di:waypoint x="410" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_04m7ocq_di" bpmnElement="TextAnnotation_04m7ocq">
+        <dc:Bounds x="317" y="120" width="185" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0q7bqd0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_0y05wt1">
+    <bpmn:participant id="AnnulerenPortaaltaakIvmOntvangenBestandenViaEmailpostParticipant" name="Annuleren portaaltaak ivm ontvangen bestanden via e-mail/post" processRef="annuleren-portaaltaak" />
+    <bpmn:textAnnotation id="TextAnnotation_04m7ocq">
+      <bpmn:text>Implementeer methode:
+correlate message 'MESSAGE_CANCEL_PORTAL_TASK' naar dit businessKey</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1m74lvf" associationDirection="None" sourceRef="TextAnnotation_04m7ocq" targetRef="Event_158r0yn" />
+  </bpmn:collaboration>
+  <bpmn:process id="annuleren-portaaltaak" name="Annuleren portaaltaak ivm ontvangen bestanden via e-mail/post" isExecutable="true">
+    <bpmn:endEvent id="Event_158r0yn" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_0jw8n7l</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1wyflep" camunda:expression="${messageCorrelationService.sendCorrelationMessageByBusinessKey(&#34;MESSAGE_CANCEL_PORTAL_TASK&#34;, execution.businessKey)}" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartAnnuleeringStartEvent" name="Start annuleering">
+      <bpmn:outgoing>Flow_0jw8n7l</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0jw8n7l" sourceRef="StartAnnuleeringStartEvent" targetRef="Event_158r0yn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y05wt1">
+      <bpmndi:BPMNShape id="Participant_1nv3dq9_di" bpmnElement="AnnulerenPortaaltaakIvmOntvangenBestandenViaEmailpostParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="340" height="270" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1867mmc_di" bpmnElement="Event_158r0yn">
+        <dc:Bounds x="352" y="227" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zho5du_di" bpmnElement="StartAnnuleeringStartEvent">
+        <dc:Bounds x="242" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="221" y="270" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0jw8n7l_di" bpmnElement="Flow_0jw8n7l">
+        <di:waypoint x="278" y="245" />
+        <di:waypoint x="352" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1m74lvf_di" bpmnElement="Association_1m74lvf">
+        <di:waypoint x="370" y="180" />
+        <di:waypoint x="370" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_04m7ocq_di" bpmnElement="TextAnnotation_04m7ocq">
+        <dc:Bounds x="277" y="110" width="185" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

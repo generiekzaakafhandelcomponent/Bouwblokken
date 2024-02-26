@@ -1,0 +1,7 @@
+[
+    {
+        "formName": "vastleggen-reactie-op-informatieverzoek.start",
+        "formLinkElementId": "StartVastleggenReactieStartEvent",
+        "formAssociationType": "start-event"
+    }
+]
