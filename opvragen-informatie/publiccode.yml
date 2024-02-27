@@ -11,7 +11,7 @@ description:
       - Opvragen informatie
     genericName: GZAC Component
 
-    shortDescription: This gzac component contains the 'opvragen informatie' process
+    shortDescription: This gzac component contains the 'opvragen informatie' building block
 developmentStatus: stable
 intendedAudience:
   countries:
