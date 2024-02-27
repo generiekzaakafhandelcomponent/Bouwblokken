@@ -4,7 +4,7 @@
     <bpmn:participant id="AnnulerenPortaaltaakIvmOntvangenBestandenViaEmailpostParticipant" name="Annuleren portaaltaak ivm ontvangen bestanden via e-mail/post" processRef="annuleren-portaaltaak" />
     <bpmn:textAnnotation id="TextAnnotation_04m7ocq">
       <bpmn:text>Implementeer methode:
-correlate message 'MESSAGE_CANCEL_PORTAL_TASK' naar dit businessKey</bpmn:text>
+correlate message naar de businessKey 'MESSAGE_CANCEL_PORTAL_TASK'</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1m74lvf" associationDirection="None" sourceRef="TextAnnotation_04m7ocq" targetRef="Event_158r0yn" />
   </bpmn:collaboration>
@@ -38,11 +38,11 @@ correlate message 'MESSAGE_CANCEL_PORTAL_TASK' naar dit businessKey</bpmn:text>
         <di:waypoint x="352" y="245" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1m74lvf_di" bpmnElement="Association_1m74lvf">
-        <di:waypoint x="370" y="180" />
-        <di:waypoint x="370" y="227" />
+        <di:waypoint x="327" y="170" />
+        <di:waypoint x="361" y="230" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_04m7ocq_di" bpmnElement="TextAnnotation_04m7ocq">
-        <dc:Bounds x="277" y="110" width="185" height="70" />
+        <dc:Bounds x="220" y="110" width="260" height="60" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
