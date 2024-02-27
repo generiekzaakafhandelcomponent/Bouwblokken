@@ -1,0 +1,17 @@
+[
+    {
+        "formName": "opvragen-informatie.beoordelen-resultaat",
+        "formLinkElementId": "BeoordelenResultaatInformatieverzoekTask",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "opvragen-informatie.beoordelen-resultaat",
+        "formLinkElementId": "BeoordelenResultaatInformatieverzoekTask1",
+        "formAssociationType": "user-task"
+    },
+    {
+        "formName": "opvragen-informatie.beoordelen-resultaat",
+        "formLinkElementId": "BeoordelenResultaatInformatieverzoekTask2",
+        "formAssociationType": "user-task"
+    }
+]

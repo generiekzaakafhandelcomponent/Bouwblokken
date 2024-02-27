@@ -1,0 +1,25 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "content": "Door deze taak af te ronden wordt het informatieverzoek dat is uitgezet via het klantportaal geannuleerd. Klik op 'doorgaan' wanneer de gevraagde documenten al handmatig aan het dossier zijn toegevoegd.</br>",
+            "tableView": true,
+            "tag": "p",
+            "key": "aanvraagWijzigen",
+            "type": "htmlelement",
+            "input": false,
+            "label": "HTML"
+        },
+        {
+            "label": "Doorgaan",
+            "type": "button",
+            "action": "custom",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "custom": "form.submit(); component.disabled = true;",
+            "tableView": false,
+            "key": "submit",
+            "input": true
+        }
+    ]
+}
