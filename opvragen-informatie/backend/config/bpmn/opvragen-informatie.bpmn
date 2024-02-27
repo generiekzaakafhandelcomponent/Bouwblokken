@@ -3,19 +3,19 @@
   <bpmn:collaboration id="Collaboration_0lw88p5">
     <bpmn:participant id="OpvragenInformatieParticipant" name="Opvragen informatie" processRef="opvragen-informatie" />
     <bpmn:textAnnotation id="TextAnnotation_03zw3fq">
-      <bpmn:text>implementeer methode:
+      <bpmn:text>Implementeer methode:
 controleer of er een hersteltermijn is geconfigureerd op het huidige informatieverzoek en sla het resultaat op in een process variable</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_0hshm1g">
-      <bpmn:text>implementeer methode:
-leg de huidige datum en tijd vast als startdatum van de hersteltermijn en sla het resultaat op in een process varuable</bpmn:text>
+      <bpmn:text>Implementeer methode:
+leg de huidige datum en tijd vast als startdatum van de hersteltermijn en sla het resultaat op in een process variable</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_1xi3ph1">
       <bpmn:text>Configureer bouwblok:
 gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variable als input</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_1docw4n">
-      <bpmn:text>implementeer methode:
+      <bpmn:text>Implementeer methode:
 leg de reactietermijn vanuit het informatieverzoek vast in een process variable</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_1b8fdib">
@@ -28,7 +28,7 @@ neem flow op basis van het resultaat van de vorige service taak</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_02jf1sg">
       <bpmn:text>Configureer bouwblok:
-gebtuik de 'controleren afhandeltermijn' bouwblock om de afhandeltermijn van dit informatieverzoek te verwerken</bpmn:text>
+gebruik de 'controleren afhandeltermijn' bouwblok om de afhandeltermijn van dit informatieverzoek te verwerken</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_11v3wzd">
       <bpmn:text>Configureer gateway:
@@ -51,8 +51,8 @@ gebruik de 'zet zaakstatus' bouwblok om een informatieve zaakstatus op de zaak t
 gebruik de 'zet zaakstatus' bouwblok om een informatieve zaakstatus op de zaak te zetten bijv. 'Informatie aangeleverd'</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_0vzq2rr">
-      <bpmn:text>implementeer methode:
-haal op alle in de portaaltaak geüploade documenten en sla ze op in een process variable 'reactionDocuments'</bpmn:text>
+      <bpmn:text>Implementeer methode:
+haal alle in de portaaltaak geüploade documenten op en sla ze op in een process variable 'reactionDocuments'</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_08g6mrv">
       <bpmn:text>Configureer Portaaltaak plugin action:
@@ -79,8 +79,7 @@ annuleer de openstaande portaaltaak</bpmn:text>
     <bpmn:association id="Association_10x7vhk" associationDirection="None" sourceRef="TextAnnotation_1jis4qt" targetRef="AnnulerenPortaaltaakTask1" />
     <bpmn:association id="Association_1uu9g9r" associationDirection="None" sourceRef="TextAnnotation_02jf1sg" targetRef="ControlerenAfhandeltermijnTask" />
     <bpmn:textAnnotation id="TextAnnotation_0td3xm6">
-      <bpmn:text>Configureer smartdocuments plugin action:
-Genereer een document over de ontvangen gegevens</bpmn:text>
+      <bpmn:text>Implementeer een document generatie service om een een bevestigingsbrief over het ontvangen van de gevraagde gegevens te genereren.</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0k6i5r6" associationDirection="None" sourceRef="TextAnnotation_0td3xm6" targetRef="GenererenDocumentTask" />
     <bpmn:textAnnotation id="TextAnnotation_03ysy51">
@@ -88,6 +87,18 @@ Genereer een document over de ontvangen gegevens</bpmn:text>
 gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variable als input en informeer de aanvrager over de ontvangen informatieverzoek</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0ega8i0" associationDirection="None" sourceRef="TextAnnotation_03ysy51" targetRef="InformerenAanvragerBewijsstukkenOntvangenCallActivity" />
+    <bpmn:textAnnotation id="TextAnnotation_1o5s4bd">
+      <bpmn:text>Configureer timer op basis van de opgehaalde  reactietermijn</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0nrqt6h" associationDirection="None" sourceRef="ReactietermijnVerlopenEvent" targetRef="TextAnnotation_1o5s4bd" />
+    <bpmn:textAnnotation id="TextAnnotation_00jh54i">
+      <bpmn:text>Link adhoc proces 'vastleggen-reactie-op-informatieverzoek' om de behandelaar de mogelijkheid te geven om een reactie rechtstreeks in GZAC te registeren</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1ad56bc" associationDirection="None" sourceRef="ReactieOntvangenEvent" targetRef="TextAnnotation_00jh54i" />
+    <bpmn:textAnnotation id="TextAnnotation_12t85sv">
+      <bpmn:text>Link adhoc proces 'annuleren-portaaltaak' om de behandelaar de mogelijkheid te geven om een portaaltaak te annuleren</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_01yhoia" associationDirection="None" sourceRef="TextAnnotation_12t85sv" targetRef="AnnulerenPortaaltaakBoundaryEvent" />
   </bpmn:collaboration>
   <bpmn:process id="opvragen-informatie" name="Opvragen informatie" isExecutable="true">
     <bpmn:laneSet id="LaneSet_01ypzz8">
@@ -358,7 +369,7 @@ gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variab
       <bpmndi:BPMNShape id="Event_0jkqc6o_di" bpmnElement="ReactietermijnVerlopenEvent">
         <dc:Bounds x="1752" y="1032" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1737" y="1075" width="67" height="27" />
+          <dc:Bounds x="1736" y="994.5" width="67" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1inwo8h_di" bpmnElement="HersteltermijnVerlopenEndEvent">
@@ -607,8 +618,60 @@ gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variab
         <di:waypoint x="2810" y="940" />
         <di:waypoint x="2870" y="940" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0nrqt6h_di" bpmnElement="Association_0nrqt6h">
+        <di:waypoint x="1770" y="1068" />
+        <di:waypoint x="1770" y="1250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1ad56bc_di" bpmnElement="Association_1ad56bc">
+        <di:waypoint x="1759" y="926" />
+        <di:waypoint x="1733" y="890" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0k6i5r6_di" bpmnElement="Association_0k6i5r6">
+        <di:waypoint x="2760" y="1245" />
+        <di:waypoint x="2760" y="980" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_02v0bdp_di" bpmnElement="Association_02v0bdp">
+        <di:waypoint x="2099" y="660" />
+        <di:waypoint x="1974" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1vludhz_di" bpmnElement="Association_1vludhz">
+        <di:waypoint x="2031" y="214" />
+        <di:waypoint x="1978" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1wkqpo7_di" bpmnElement="Association_1wkqpo7">
+        <di:waypoint x="1786" y="202" />
+        <di:waypoint x="1775" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_04osdnh_di" bpmnElement="Association_04osdnh">
+        <di:waypoint x="1548" y="185" />
+        <di:waypoint x="1571" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_01yhoia_di" bpmnElement="Association_01yhoia">
+        <di:waypoint x="1306" y="202" />
+        <di:waypoint x="1516" y="359" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0lp6kdc_di" bpmnElement="Association_0lp6kdc">
+        <di:waypoint x="1605" y="681" />
+        <di:waypoint x="1741" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_10x7vhk_di" bpmnElement="Association_10x7vhk">
+        <di:waypoint x="1619" y="681" />
+        <di:waypoint x="1722" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1k18nvk_di" bpmnElement="Association_1k18nvk">
+        <di:waypoint x="1100" y="1133" />
+        <di:waypoint x="1100" y="980" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1uu9g9r_di" bpmnElement="Association_1uu9g9r">
+        <di:waypoint x="2600" y="1119" />
+        <di:waypoint x="2600" y="980" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ega8i0_di" bpmnElement="Association_0ega8i0">
+        <di:waypoint x="2920" y="1112" />
+        <di:waypoint x="2920" y="980" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_03zw3fq_di" bpmnElement="TextAnnotation_03zw3fq">
-        <dc:Bounds x="270" y="1250" width="220" height="80" />
+        <dc:Bounds x="270" y="1250" width="220" height="84" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0y4q5sm" bpmnElement="TextAnnotation_0hshm1g">
@@ -623,16 +686,8 @@ gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variab
         <dc:Bounds x="1160" y="1257" width="220" height="70" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0pmf953" bpmnElement="TextAnnotation_1b8fdib">
-        <dc:Bounds x="990" y="1090" width="220" height="84" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0vqfzq6" bpmnElement="TextAnnotation_0778xiq">
         <dc:Bounds x="400" y="1133" width="220" height="55" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1dbyws0" bpmnElement="TextAnnotation_02jf1sg">
-        <dc:Bounds x="2490" y="1060" width="220" height="84" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0yrnope" bpmnElement="TextAnnotation_11v3wzd">
@@ -647,34 +702,6 @@ gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variab
         <dc:Bounds x="1840" y="1133" width="220" height="84" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1o5ttw6" bpmnElement="TextAnnotation_16nlg2x">
-        <dc:Bounds x="2010" y="540" width="220" height="84" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1q08uit" bpmnElement="TextAnnotation_1qderbo">
-        <dc:Bounds x="1840" y="130" width="220" height="84" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1t7va3p" bpmnElement="TextAnnotation_0vzq2rr">
-        <dc:Bounds x="1580" y="132" width="220" height="84" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1qmlcry" bpmnElement="TextAnnotation_08g6mrv">
-        <dc:Bounds x="1220" y="130" width="220" height="55" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1lh8b1j" bpmnElement="TextAnnotation_1jis4qt">
-        <dc:Bounds x="1480" y="660" width="220" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1t6flcm" bpmnElement="TextAnnotation_0td3xm6">
-        <dc:Bounds x="2635" y="1265" width="250" height="70" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1jpwr1y" bpmnElement="TextAnnotation_03ysy51">
-        <dc:Bounds x="2810" y="1060" width="220" height="98" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1qnuacf_di" bpmnElement="Association_1qnuacf">
         <di:waypoint x="650" y="1250" />
         <di:waypoint x="650" y="1090" />
@@ -686,10 +713,6 @@ gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variab
       <bpmndi:BPMNEdge id="Association_1b9nf3w_di" bpmnElement="Association_1b9nf3w">
         <di:waypoint x="930" y="1250" />
         <di:waypoint x="930" y="980" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1k18nvk_di" bpmnElement="Association_1k18nvk">
-        <di:waypoint x="1100" y="1090" />
-        <di:waypoint x="1100" y="980" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1s0hzss_di" bpmnElement="Association_1s0hzss">
         <di:waypoint x="510" y="1133" />
@@ -711,42 +734,54 @@ gebruik de 'Informeren aanvrager' bouwblok. met de 'communicatievoorkeur' variab
         <di:waypoint x="1950" y="1133" />
         <di:waypoint x="1950" y="1090" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_02v0bdp_di" bpmnElement="Association_02v0bdp">
-        <di:waypoint x="2063" y="540" />
-        <di:waypoint x="1993" y="489" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1vludhz_di" bpmnElement="Association_1vludhz">
-        <di:waypoint x="1950" y="214" />
-        <di:waypoint x="1950" y="290" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1wkqpo7_di" bpmnElement="Association_1wkqpo7">
-        <di:waypoint x="1712" y="216" />
-        <di:waypoint x="1750" y="290" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_04osdnh_di" bpmnElement="Association_04osdnh">
-        <di:waypoint x="1377" y="185" />
-        <di:waypoint x="1531" y="295" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0lp6kdc_di" bpmnElement="Association_0lp6kdc">
-        <di:waypoint x="1606" y="660" />
-        <di:waypoint x="1739" y="490" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_10x7vhk_di" bpmnElement="Association_10x7vhk">
-        <di:waypoint x="1624" y="660" />
-        <di:waypoint x="1720" y="601" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1uu9g9r_di" bpmnElement="Association_1uu9g9r">
-        <di:waypoint x="2600" y="1060" />
-        <di:waypoint x="2600" y="980" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0k6i5r6_di" bpmnElement="Association_0k6i5r6">
-        <di:waypoint x="2760" y="1265" />
-        <di:waypoint x="2760" y="980" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0ega8i0_di" bpmnElement="Association_0ega8i0">
-        <di:waypoint x="2920" y="1060" />
-        <di:waypoint x="2920" y="980" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1o5s4bd_di" bpmnElement="TextAnnotation_1o5s4bd">
+        <dc:Bounds x="1720" y="1250" width="160" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_00jh54i_di" bpmnElement="TextAnnotation_00jh54i">
+        <dc:Bounds x="1630" y="783" width="190" height="107" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1t6flcm" bpmnElement="TextAnnotation_0td3xm6">
+        <dc:Bounds x="2635" y="1245" width="250" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1o5ttw6" bpmnElement="TextAnnotation_16nlg2x">
+        <dc:Bounds x="2020" y="660" width="220" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1q08uit" bpmnElement="TextAnnotation_1qderbo">
+        <dc:Bounds x="1950" y="130" width="220" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1t7va3p" bpmnElement="TextAnnotation_0vzq2rr">
+        <dc:Bounds x="1680" y="132" width="220" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1qmlcry" bpmnElement="TextAnnotation_08g6mrv">
+        <dc:Bounds x="1430" y="130" width="220" height="55" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1k3mqs0" bpmnElement="TextAnnotation_12t85sv">
+        <dc:Bounds x="1190" y="132" width="190" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1lh8b1j" bpmnElement="TextAnnotation_1jis4qt">
+        <dc:Bounds x="1480" y="681" width="220" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0pmf953" bpmnElement="TextAnnotation_1b8fdib">
+        <dc:Bounds x="990" y="1133" width="220" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1dbyws0" bpmnElement="TextAnnotation_02jf1sg">
+        <dc:Bounds x="2490" y="1119" width="220" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1jpwr1y" bpmnElement="TextAnnotation_03ysy51">
+        <dc:Bounds x="2810" y="1112" width="220" height="98" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
