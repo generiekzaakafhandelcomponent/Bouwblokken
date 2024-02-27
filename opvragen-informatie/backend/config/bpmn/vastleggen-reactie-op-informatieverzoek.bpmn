@@ -4,7 +4,7 @@
     <bpmn:participant id="VastleggenReactieOpInformatieverzoekParticipant" name="Vastleggen reactie op informatieverzoek" processRef="vastleggen-reactie-op-informatieverzoek" />
     <bpmn:textAnnotation id="TextAnnotation_04m7ocq">
       <bpmn:text>Implementeer methode:
-correlate message 'MESSAGE_INFORMATIE_REACTIE_ONTVANGEN' naar dit businessKey</bpmn:text>
+correlate message naar de businessKey 'MESSAGE_INFORMATIE_REACTIE_ONTVANGEN'</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_05ysz4w" associationDirection="None" sourceRef="ReactieIsVastgelegdEndEventEndEvent" targetRef="TextAnnotation_04m7ocq" />
   </bpmn:collaboration>
@@ -21,7 +21,7 @@ correlate message 'MESSAGE_INFORMATIE_REACTIE_ONTVANGEN' naar dit businessKey</b
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y05wt1">
       <bpmndi:BPMNShape id="Participant_1nv3dq9_di" bpmnElement="VastleggenReactieOpInformatieverzoekParticipant" isHorizontal="true">
-        <dc:Bounds x="160" y="80" width="350" height="310" />
+        <dc:Bounds x="160" y="80" width="370" height="310" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0zho5du_di" bpmnElement="StartVastleggenReactieStartEvent">
@@ -41,11 +41,11 @@ correlate message 'MESSAGE_INFORMATIE_REACTIE_ONTVANGEN' naar dit businessKey</b
         <di:waypoint x="392" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_05ysz4w_di" bpmnElement="Association_05ysz4w">
-        <di:waypoint x="410" y="232" />
-        <di:waypoint x="410" y="204" />
+        <di:waypoint x="396" y="239" />
+        <di:waypoint x="325" y="180" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_04m7ocq_di" bpmnElement="TextAnnotation_04m7ocq">
-        <dc:Bounds x="317" y="120" width="185" height="84" />
+        <dc:Bounds x="210" y="120" width="300" height="60" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
